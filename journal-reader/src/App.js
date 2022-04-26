@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { client } from "./ApolloClient/client";
 import { ApolloProvider } from "@apollo/client";
-import JournalPage from "./JournalPage";
+import JournalPage from "./Pages/JournalPage";
 
 function App() {
   return (
