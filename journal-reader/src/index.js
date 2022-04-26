@@ -4,10 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-const element = document.getElementById("journal-reader");
-const journalID = element.getAttribute("journal-id");
-console.log(journalID);
-const root = ReactDOM.createRoot(element);
+const root = ReactDOM.createRoot(document.getElementById("journal-reader"));
 root.render(
   <React.StrictMode>
     <App />

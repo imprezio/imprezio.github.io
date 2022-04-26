@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
+import { client } from "./ApolloClient/client";
+import { ApolloProvider } from "@apollo/client";
+import JournalPage from "./JournalPage";
 
-const App = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log("TEST");
-    };
-    fetchData();
-  });
-  return <div className="App"></div>;
-};
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <div className="App">
+        <JournalPage />
+      </div>
+    </ApolloProvider>
+  );
+}
 
 export default App;
