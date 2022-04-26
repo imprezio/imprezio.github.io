@@ -1,26 +1,9 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
 import Volumes from "./Volumes";
+import api from "../api";
 
 const JournalPage = ({ journalID }) => {
-  const JOURNALS = gql`
-    query Journals {
-      paginatedReadJournals(limit: 1, offset: 0, ID: ${journalID}) {
-        edges {
-          node {
-            ID
-            Title
-          }
-        }
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-          totalCount
-        }
-      }
-    }
-  `;
-  const { data, loading, error } = useQuery(JOURNALS);
+  const { data, loading, error } = api.GetJournal(journalID);
   if (loading) {
     return <div>loading</div>;
   }

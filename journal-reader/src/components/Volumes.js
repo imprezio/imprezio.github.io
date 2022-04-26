@@ -1,31 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
+import api from "../api";
 
 const Volumes = ({ journalID }) => {
   const limit = 2;
-  let offset = 0;
-  const VOLUMES = gql`
-    query Volumes {
-      paginatedReadVolumes(limit: ${limit}, offset: ${offset}, JournalID: ${journalID}) {
-        edges {
-          node {
-            ID
-            Title
-            URLSegment
-            CoverURL
-            ImageURL
-            JournalID
-          }
-        }
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-          totalCount
-        }
-      }
-    }
-  `;
-  const { data, loading, error } = useQuery(VOLUMES);
+  const offset = 0;
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    console.log("useEffect");
+  }, [page]);
+  const { data, loading, error } = api.GetVolumes(journalID, limit, offset);
   if (loading) {
     return <div>loading</div>;
   }
@@ -38,9 +22,23 @@ const Volumes = ({ journalID }) => {
   } = data;
   return (
     <div>
-      {edges.map(({ node: { ID, Title } }) => {
-        return <div key={ID}>{Title}</div>;
-      })}
+      <ul>
+        {edges.map(({ node: { ID, Title } }) => {
+          return <li key={ID}>{Title}</li>;
+        })}
+      </ul>
+      <button
+        onClick={() => {
+          setPage(page - 1);
+        }}>
+        Prev
+      </button>
+      <button
+        onClick={() => {
+          setPage(page + 1);
+        }}>
+        Next
+      </button>
     </div>
   );
 };
