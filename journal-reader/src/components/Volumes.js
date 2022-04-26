@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
 import api from "../api";
 
 const Volumes = ({ journalID }) => {
   const limit = 2;
-  const offset = 0;
-  const [page, setPage] = useState(1);
+  const [offset, setOffset] = useState(0);
+  const { data, loading, error } = api.GetVolumes(journalID, limit, offset);
   useEffect(() => {
     console.log("useEffect");
-  }, [page]);
-  const { data, loading, error } = api.GetVolumes(journalID, limit, offset);
+    console.log(data);
+  }, [loading, offset]);
   if (loading) {
     return <div>loading</div>;
   }
@@ -20,6 +19,24 @@ const Volumes = ({ journalID }) => {
   const {
     paginatedReadVolumes: { edges },
   } = data;
+  const prevButton =
+    offset > 0 ? (
+      <button
+        onClick={() => {
+          setOffset(offset - limit);
+        }}>
+        Prev
+      </button>
+    ) : null;
+  const nextButton =
+    offset <= limit ? (
+      <button
+        onClick={() => {
+          setOffset(offset + limit);
+        }}>
+        Next
+      </button>
+    ) : null;
   return (
     <div>
       <ul>
@@ -27,18 +44,8 @@ const Volumes = ({ journalID }) => {
           return <li key={ID}>{Title}</li>;
         })}
       </ul>
-      <button
-        onClick={() => {
-          setPage(page - 1);
-        }}>
-        Prev
-      </button>
-      <button
-        onClick={() => {
-          setPage(page + 1);
-        }}>
-        Next
-      </button>
+      {prevButton}
+      {nextButton}
     </div>
   );
 };
