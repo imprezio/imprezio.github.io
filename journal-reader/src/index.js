@@ -4,10 +4,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById("journal-reader"));
+const element = document.getElementsByClassName("uninitialized-op-widget")[0];
+element.classList.remove("uninitialized-op-widget");
+const root = ReactDOM.createRoot(element);
 root.render(
   <React.StrictMode>
-    <App />
+    <App element={element} />
   </React.StrictMode>
 );
 

@@ -4,13 +4,17 @@ import { client } from "./ApolloClient/client";
 import { ApolloProvider } from "@apollo/client";
 import JournalPage from "./Pages/JournalPage";
 
-function App() {
+function App({ element }) {
+  const graphqlURL = element.getAttribute("data-graphql-url");
+  const journalID = element.getAttribute("data-journal-id");
   return (
-    <ApolloProvider client={client}>
-      <div className="App">
-        <JournalPage />
-      </div>
-    </ApolloProvider>
+    <div className="App">
+      <ApolloProvider client={client(graphqlURL)}>
+        <div className="App">
+          <JournalPage journalID={journalID} />
+        </div>
+      </ApolloProvider>
+    </div>
   );
 }
 

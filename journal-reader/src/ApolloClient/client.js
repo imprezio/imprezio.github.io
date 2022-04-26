@@ -5,14 +5,12 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 
-const element = document.getElementById("journal-reader");
-const url = element.getAttribute("graphql-url");
-
-const httpLink = new HttpLink({
-  uri: element.getAttribute("graphql-url"),
-});
-
-export const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: ApolloLink.from([httpLink]),
-});
+export const client = (url) => {
+  const httpLink = new HttpLink({
+    uri: url,
+  });
+  return new ApolloClient({
+    cache: new InMemoryCache(),
+    link: ApolloLink.from([httpLink]),
+  });
+};

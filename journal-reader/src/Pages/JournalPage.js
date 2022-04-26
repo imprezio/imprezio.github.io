@@ -1,27 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom/client";
 import { useQuery, gql } from "@apollo/client";
-
-const journalID = document
-  .getElementById("journal-reader")
-  .getAttribute("journal-id");
-
-const JOURNALS = gql`
-  query Journals {
-    paginatedReadJournals(limit: 1, offset: 0, ID: ${journalID}) {
-      edges {
-        node {
-          ID
-          Title
-        }
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        totalCount
-      }
-    }
-  }
-`;
 
 // const VOLUMES = gql`
 // query Volumes {
@@ -44,13 +23,31 @@ const JOURNALS = gql`
 //   }
 // }`;
 
-const JournalPage = () => {
+const JournalPage = ({ journalID }) => {
+  const JOURNALS = gql`
+    query Journals {
+      paginatedReadJournals(limit: 1, offset: 0, ID: ${journalID}) {
+        edges {
+          node {
+            ID
+            Title
+          }
+        }
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          totalCount
+        }
+      }
+    }
+  `;
   const { data, loading, error } = useQuery(JOURNALS);
   if (loading) {
     return <div>loading</div>;
   }
   if (error) {
-    return <div>{error}</div>;
+    console.log(error);
+    return <div>error</div>;
   }
   const { Title } = data.paginatedReadJournals.edges[0].node;
   return (
