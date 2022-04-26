@@ -1,27 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import { useQuery, gql } from "@apollo/client";
-
-// const VOLUMES = gql`
-// query Volumes {
-//   paginatedReadVolumes(limit: 25, offset: 0, JournalID: 1) {
-//     edges {
-//       node {
-//         ID
-// 				Title
-// 				URLSegment
-// 				CoverURL
-// 				ImageURL
-// 				JournalID
-//       }
-//     }
-//     pageInfo {
-//       hasNextPage
-//       hasPreviousPage
-//       totalCount
-//     }
-//   }
-// }`;
+import Volumes from "./Volumes";
 
 const JournalPage = ({ journalID }) => {
   const JOURNALS = gql`
@@ -53,6 +32,7 @@ const JournalPage = ({ journalID }) => {
   return (
     <div>
       <h1>{Title}</h1>
+      <Volumes journalID={journalID} />
     </div>
   );
 };

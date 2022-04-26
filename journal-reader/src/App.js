@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { client } from "./ApolloClient/client";
 import { ApolloProvider } from "@apollo/client";
-import JournalPage from "./Pages/JournalPage";
+import JournalPage from "./components/JournalPage";
 
 function App({ element }) {
   const graphqlURL = element.getAttribute("data-graphql-url");
