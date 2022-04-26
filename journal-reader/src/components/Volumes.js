@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import api from "../api";
 
 const Volumes = ({ journalID }) => {
-  const limit = 2;
+  const limit = 10;
   const [offset, setOffset] = useState(0);
   const { data, loading, error } = api.GetVolumes(journalID, limit, offset);
   useEffect(() => {
-    console.log("useEffect");
-    console.log(data);
+    //
   }, [loading, offset]);
   if (loading) {
     return <div>loading</div>;
@@ -16,9 +15,9 @@ const Volumes = ({ journalID }) => {
     console.log(error);
     return <div>error</div>;
   }
-  const {
-    paginatedReadVolumes: { edges },
-  } = data;
+  const { paginatedReadVolumes } = data;
+  const { edges } = paginatedReadVolumes;
+  const total = paginatedReadVolumes.pageInfo.totalCount;
   const prevButton =
     offset > 0 ? (
       <button
@@ -28,8 +27,11 @@ const Volumes = ({ journalID }) => {
         Prev
       </button>
     ) : null;
+  console.log("start");
+  console.log(offset + limit);
+  console.log(total - 1);
   const nextButton =
-    offset <= limit ? (
+    offset + limit < total && total > limit ? (
       <button
         onClick={() => {
           setOffset(offset + limit);
