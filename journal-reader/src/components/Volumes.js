@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
 import Issues from "./Issues";
+import Pagination from "./Pagination";
 
 const Volumes = ({ journalID }) => {
   const limit = 10;
@@ -19,31 +20,6 @@ const Volumes = ({ journalID }) => {
   const { paginatedReadVolumes } = data;
   const { edges } = paginatedReadVolumes;
   const total = paginatedReadVolumes.pageInfo.totalCount;
-  const prevButton =
-    offset > 0 ? (
-      <button
-        onClick={() => {
-          setOffset(offset - limit);
-        }}>
-        Prev
-      </button>
-    ) : null;
-  const nextButton =
-    offset + limit < total && total > limit ? (
-      <button
-        onClick={() => {
-          setOffset(offset + limit);
-        }}>
-        Next
-      </button>
-    ) : null;
-  const buttons =
-    prevButton || nextButton ? (
-      <li>
-        {prevButton}
-        {nextButton}
-      </li>
-    ) : null;
   return (
     <ul>
       {edges.map(({ node: volume }) => {
@@ -53,7 +29,12 @@ const Volumes = ({ journalID }) => {
           </li>
         );
       })}
-      {buttons}
+      <Pagination
+        offset={offset}
+        setOffset={setOffset}
+        limit={limit}
+        total={total}
+      />
     </ul>
   );
 };
