@@ -3,7 +3,7 @@ import api from "../api";
 import Issues from "./Issues";
 import Pagination from "./Pagination";
 
-const Volumes = ({ journalID }) => {
+const Volumes = ({ journalID, updateContent }) => {
   const limit = 10;
   const [offset, setOffset] = useState(0);
   const { data, loading, error } = api.GetVolumes(journalID, limit, offset);
@@ -26,7 +26,11 @@ const Volumes = ({ journalID }) => {
         {edges.map(({ node: volume }) => {
           return (
             <li key={volume.ID}>
-              <Issues volume={volume} issueID={volume.ID} />
+              <Issues
+                volume={volume}
+                issueID={volume.ID}
+                updateContent={updateContent}
+              />
             </li>
           );
         })}

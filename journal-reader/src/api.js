@@ -33,6 +33,7 @@ const api = {
               CoverURL
               ImageURL
               JournalID
+              Content
             }
           }
           pageInfo {

@@ -3,11 +3,11 @@ import api from "../api";
 import Articles from "./Articles";
 import Pagination from "./Pagination";
 
-const Issues = ({ volume: { ID, Title } }) => {
+const Issues = ({ volume, updateContent }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
-  const { data, loading, error } = api.GetIssues(ID, limit, offset);
+  const { data, loading, error } = api.GetIssues(volume.ID, limit, offset);
   const edges = data && active ? data.paginatedReadIssues.edges : [];
   const total =
     data && active ? data.paginatedReadIssues.pageInfo.totalCount : 0;
@@ -33,9 +33,10 @@ const Issues = ({ volume: { ID, Title } }) => {
     <>
       <button
         onClick={() => {
+          if (!active) updateContent(volume);
           setActive(!active);
         }}>
-        {Title}
+        {volume.Title}
       </button>
       <ul>
         {edges.map(({ node: issue }) => {
