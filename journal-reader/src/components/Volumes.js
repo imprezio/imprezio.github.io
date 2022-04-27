@@ -21,21 +21,23 @@ const Volumes = ({ journalID }) => {
   const { edges } = paginatedReadVolumes;
   const total = paginatedReadVolumes.pageInfo.totalCount;
   return (
-    <ul>
-      {edges.map(({ node: volume }) => {
-        return (
-          <li key={volume.ID}>
-            <Issues volume={volume} issueID={volume.ID} />
-          </li>
-        );
-      })}
-      <Pagination
-        offset={offset}
-        setOffset={setOffset}
-        limit={limit}
-        total={total}
-      />
-    </ul>
+    <>
+      <ul>
+        {edges.map(({ node: volume }) => {
+          return (
+            <li key={volume.ID}>
+              <Issues volume={volume} issueID={volume.ID} />
+            </li>
+          );
+        })}
+        <Pagination
+          offset={offset}
+          setOffset={setOffset}
+          limit={limit}
+          total={total}
+        />
+      </ul>
+    </>
   );
 };
 
