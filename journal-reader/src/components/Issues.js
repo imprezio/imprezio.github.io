@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
+import Articles from "./Articles";
 import Pagination from "./Pagination";
 
 const Issues = ({ volume: { ID, Title } }) => {
   const limit = 25;
   const [offset, setOffset] = useState(0);
+  const [active, setActive] = useState(false);
   const { data, loading, error } = api.GetIssues(ID, limit, offset);
-  const edges = data ? data.paginatedReadIssues.edges : [];
-  const total = data ? data.paginatedReadIssues.pageInfo.totalCount : 0;
+  const edges = data && active ? data.paginatedReadIssues.edges : [];
+  const total =
+    data && active ? data.paginatedReadIssues.pageInfo.totalCount : 0;
   useEffect(() => {
     //
   }, [loading, offset]);
@@ -20,12 +23,17 @@ const Issues = ({ volume: { ID, Title } }) => {
   }
   return (
     <>
-      <button>{Title}</button>
+      <button
+        onClick={() => {
+          setActive(!active);
+        }}>
+        {Title}
+      </button>
       <ul>
         {edges.map(({ node: issue }) => {
           return (
             <li key={issue.ID}>
-              <button>{issue.Title}</button>
+              <Articles issue={issue} />
             </li>
           );
         })}
