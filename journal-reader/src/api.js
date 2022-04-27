@@ -84,7 +84,7 @@ const api = {
                 URLSegment
                 DOI
                 Content
-                Type
+                ArticleType
                 FileURL
                 IssueID
             }

@@ -24,6 +24,7 @@ const JournalPage = ({ journalID }) => {
     DOI,
     Number,
     Year,
+    ArticleType,
     FileURL,
   }) => {
     const cover = CoverURL ? (
@@ -38,6 +39,7 @@ const JournalPage = ({ journalID }) => {
     const doi = DOI ? <p>{DOI}</p> : null;
     const number = Number ? <p>Number: {Number}</p> : null;
     const year = Year ? <p>Year: {Year}</p> : null;
+    const type = ArticleType ? <p>Type: {ArticleType}</p> : null;
     const file = FileURL ? (
       <p>
         File:{" "}
@@ -55,6 +57,7 @@ const JournalPage = ({ journalID }) => {
         {number}
         {year}
         {file}
+        {type}
         {htmlContent}
       </>
     );

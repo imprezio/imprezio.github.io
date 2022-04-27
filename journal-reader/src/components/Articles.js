@@ -38,10 +38,15 @@ const Articles = ({ issue, updateContent }) => {
         {issue.Title}
       </button>
       <ul>
-        {edges.map(({ node: { ID, Title } }) => {
+        {edges.map(({ node: article }) => {
           return (
-            <li key={ID}>
-              <button>{Title}</button>
+            <li key={article.ID}>
+              <button
+                onClick={() => {
+                  updateContent(article);
+                }}>
+                {article.Title}
+              </button>
             </li>
           );
         })}
