@@ -16,7 +16,16 @@ const JournalPage = ({ journalID }) => {
     return <div>error</div>;
   }
   const { Title } = data.paginatedReadJournals.edges[0].node;
-  const updateContent = ({ Title, CoverURL, ImageURL, Content }) => {
+  const updateContent = ({
+    Title,
+    CoverURL,
+    ImageURL,
+    Content,
+    DOI,
+    Number,
+    Year,
+    FileURL,
+  }) => {
     const cover = CoverURL ? (
       <img src={CoverURL} style={{ width: "10rem", height: "auto" }} />
     ) : null;
@@ -26,11 +35,26 @@ const JournalPage = ({ journalID }) => {
     const htmlContent = Content ? (
       <div dangerouslySetInnerHTML={{ __html: Content }} />
     ) : null;
+    const doi = DOI ? <p>{DOI}</p> : null;
+    const number = Number ? <p>Number: {Number}</p> : null;
+    const year = Year ? <p>Year: {Year}</p> : null;
+    const file = FileURL ? (
+      <p>
+        File:{" "}
+        <a href={FileURL} target="_blank">
+          {FileURL}
+        </a>
+      </p>
+    ) : null;
     setContent(
       <>
         <h1>{Title}</h1>
         {cover}
         {image}
+        {doi}
+        {number}
+        {year}
+        {file}
         {htmlContent}
       </>
     );

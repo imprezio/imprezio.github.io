@@ -42,7 +42,7 @@ const Issues = ({ volume, updateContent }) => {
         {edges.map(({ node: issue }) => {
           return (
             <li key={issue.ID}>
-              <Articles issue={issue} />
+              <Articles issue={issue} updateContent={updateContent} />
             </li>
           );
         })}

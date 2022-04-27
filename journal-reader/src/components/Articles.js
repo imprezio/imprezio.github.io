@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import api from "../api";
 import Pagination from "./Pagination";
 
-const Articles = ({ issue: { ID, Title } }) => {
+const Articles = ({ issue, updateContent }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
-  const { data, loading, error } = api.GetArticles(ID, limit, offset);
+  const { data, loading, error } = api.GetArticles(issue.ID, limit, offset);
   const edges = data && active ? data.paginatedReadArticles.edges : [];
   const total =
     data && active ? data.paginatedReadArticles.pageInfo.totalCount : 0;
@@ -32,9 +32,10 @@ const Articles = ({ issue: { ID, Title } }) => {
     <>
       <button
         onClick={() => {
+          updateContent(issue);
           setActive(!active);
         }}>
-        {Title}
+        {issue.Title}
       </button>
       <ul>
         {edges.map(({ node: { ID, Title } }) => {
