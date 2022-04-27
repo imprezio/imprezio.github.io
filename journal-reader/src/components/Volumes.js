@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
+import Issues from "./Issues";
 
 const Volumes = ({ journalID }) => {
   const limit = 10;
@@ -27,9 +28,6 @@ const Volumes = ({ journalID }) => {
         Prev
       </button>
     ) : null;
-  console.log("start");
-  console.log(offset + limit);
-  console.log(total - 1);
   const nextButton =
     offset + limit < total && total > limit ? (
       <button
@@ -39,16 +37,24 @@ const Volumes = ({ journalID }) => {
         Next
       </button>
     ) : null;
+  const buttons =
+    prevButton || nextButton ? (
+      <li>
+        {prevButton}
+        {nextButton}
+      </li>
+    ) : null;
   return (
-    <div>
-      <ul>
-        {edges.map(({ node: { ID, Title } }) => {
-          return <li key={ID}>{Title}</li>;
-        })}
-      </ul>
-      {prevButton}
-      {nextButton}
-    </div>
+    <ul>
+      {edges.map(({ node: volume }) => {
+        return (
+          <li key={volume.ID}>
+            <Issues volume={volume} issueID={volume.ID} />
+          </li>
+        );
+      })}
+      {buttons}
+    </ul>
   );
 };
 

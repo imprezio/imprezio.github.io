@@ -45,6 +45,33 @@ const api = {
     `;
     return useQuery(VOLUMES);
   },
+  GetIssues: (volumeID, limit, offset) => {
+    const ISSUES = gql`
+    query Issues {
+        paginatedReadIssues(limit: ${limit}, offset: ${offset}, VolumeID: ${volumeID}) {
+          edges {
+            node {
+              ID
+                Title
+                URLSegment
+                DOI
+                Number
+                Year
+                FileURL
+                CoverURL
+                VolumeID
+            }
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            totalCount
+          }
+        }
+      }
+    `;
+    return useQuery(ISSUES);
+  },
 };
 
 export default api;
