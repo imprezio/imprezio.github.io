@@ -11,6 +11,14 @@ const Issues = ({ volume: { ID, Title } }) => {
   const edges = data && active ? data.paginatedReadIssues.edges : [];
   const total =
     data && active ? data.paginatedReadIssues.pageInfo.totalCount : 0;
+  const pagination = active ? (
+    <Pagination
+      offset={offset}
+      setOffset={setOffset}
+      limit={limit}
+      total={total}
+    />
+  ) : null;
   useEffect(() => {
     //
   }, [loading, offset]);
@@ -37,12 +45,7 @@ const Issues = ({ volume: { ID, Title } }) => {
             </li>
           );
         })}
-        <Pagination
-          offset={offset}
-          setOffset={setOffset}
-          limit={limit}
-          total={total}
-        />
+        {pagination}
       </ul>
     </>
   );
