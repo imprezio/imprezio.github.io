@@ -72,6 +72,32 @@ const api = {
     `;
     return useQuery(ISSUES);
   },
+  GetArticles: (issueID, limit, offset) => {
+    const ISSUES = gql`
+    query Articles {
+        paginatedReadArticles(limit: ${limit}, offset: ${offset}, IssueID: ${issueID}) {
+          edges {
+            node {
+              ID
+                Title
+                URLSegment
+                DOI
+                Content
+                Type
+                FileURL
+                IssueID
+            }
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            totalCount
+          }
+        }
+      }
+    `;
+    return useQuery(ISSUES);
+  },
 };
 
 export default api;

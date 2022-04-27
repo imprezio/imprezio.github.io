@@ -4,7 +4,7 @@ import Articles from "./Articles";
 import Pagination from "./Pagination";
 
 const Issues = ({ volume: { ID, Title } }) => {
-  const limit = 25;
+  const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
   const { data, loading, error } = api.GetIssues(ID, limit, offset);
