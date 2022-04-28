@@ -4,7 +4,7 @@ import Issues from "./Issues";
 import Pagination from "./Pagination";
 
 const Volumes = ({ journalID, updateContent, activeItem }) => {
-  const limit = 10;
+  const limit = 1;
   const [offset, setOffset] = useState(0);
   const { data, loading, error } = api.GetVolumes(journalID, limit, offset);
   useEffect(() => {
