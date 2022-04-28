@@ -61,6 +61,12 @@ const api = {
                 FileURL
                 CoverURL
                 VolumeID
+                Content
+                Authors {
+                    ID
+                    FirstName
+                    Surname
+                }
             }
           }
           pageInfo {
@@ -87,6 +93,11 @@ const api = {
                 ArticleType
                 FileURL
                 IssueID
+                Authors {
+                    ID
+                    FirstName
+                    Surname
+                }
             }
           }
           pageInfo {

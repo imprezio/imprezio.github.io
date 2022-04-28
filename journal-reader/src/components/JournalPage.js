@@ -26,6 +26,7 @@ const JournalPage = ({ journalID }) => {
     Year,
     ArticleType,
     FileURL,
+    Authors,
   }) => {
     const cover = CoverURL ? (
       <img src={CoverURL} style={{ width: "10rem", height: "auto" }} />
@@ -48,6 +49,21 @@ const JournalPage = ({ journalID }) => {
         </a>
       </p>
     ) : null;
+    const authors = Authors ? (
+      <div>
+        Authors:
+        <ul>
+          {Authors.map(({ ID, FirstName, Surname }) => {
+            return (
+              <li key={ID}>
+                {Surname}, {FirstName}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ) : null;
+    console.log(authors);
     setContent(
       <>
         <h1>{Title}</h1>
@@ -58,6 +74,7 @@ const JournalPage = ({ journalID }) => {
         {year}
         {file}
         {type}
+        {authors}
         {htmlContent}
       </>
     );
