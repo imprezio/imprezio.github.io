@@ -1,7 +1,9 @@
 const Pagination = ({ offset, setOffset, limit, total }) => {
+  const prevButtonDisabled = !(offset > 0);
+  const nextButtonDisabled = !(offset + limit < total && total > limit);
   const prevButton = (
     <button
-      disabled={!(offset > 0)}
+      disabled={prevButtonDisabled}
       onClick={() => {
         setOffset(offset - limit);
       }}>
@@ -10,13 +12,16 @@ const Pagination = ({ offset, setOffset, limit, total }) => {
   );
   const nextButton = (
     <button
-      disabled={!(offset + limit < total && total > limit)}
+      disabled={nextButtonDisabled}
       onClick={() => {
         setOffset(offset + limit);
       }}>
       Next
     </button>
   );
+  if (prevButtonDisabled && nextButtonDisabled) {
+    return <></>;
+  }
   return (
     <>
       <li>{prevButton}</li>

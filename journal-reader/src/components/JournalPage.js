@@ -63,7 +63,6 @@ const JournalPage = ({ journalID }) => {
         </ul>
       </div>
     ) : null;
-    console.log(authors);
     setContent(
       <>
         <h1>{Title}</h1>
