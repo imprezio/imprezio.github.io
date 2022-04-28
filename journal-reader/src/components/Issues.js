@@ -23,7 +23,7 @@ const Issues = ({ volume, updateContent, activeItem }) => {
     //
   }, [loading, offset]);
   if (loading) {
-    return <div>loading</div>;
+    return <div>loading...</div>;
   }
   if (error) {
     console.log(error);

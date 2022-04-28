@@ -6,7 +6,7 @@ const Articles = ({ issue, updateContent, activeItem }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
-  const [articleActive, setArticleActive] = useState(false);
+  const [activeArticle, setActiveArticle] = useState(null);
   const { data, loading, error } = api.GetArticles(issue.ID, limit, offset);
   const edges = data && active ? data.paginatedReadArticles.edges : [];
   const total =
@@ -23,7 +23,7 @@ const Articles = ({ issue, updateContent, activeItem }) => {
     //
   }, [loading, offset]);
   if (loading) {
-    return <div>loading</div>;
+    return <div>loading...</div>;
   }
   if (error) {
     console.log(error);
@@ -35,6 +35,7 @@ const Articles = ({ issue, updateContent, activeItem }) => {
         onClick={() => {
           updateContent(issue);
           setActive(!active);
+          setActiveArticle(null);
         }}
         className={`${active ? "open" : ""} ${
           activeItem === issue ? "active" : ""
@@ -48,11 +49,9 @@ const Articles = ({ issue, updateContent, activeItem }) => {
               <button
                 onClick={() => {
                   updateContent(article);
-                  setArticleActive(!articleActive);
+                  setActiveArticle(article);
                 }}
-                className={`${articleActive ? "open" : ""} ${
-                  activeItem === article ? "active" : ""
-                }`}>
+                className={`${activeArticle === article ? "active" : ""}`}>
                 {article.Title}
               </button>
             </li>

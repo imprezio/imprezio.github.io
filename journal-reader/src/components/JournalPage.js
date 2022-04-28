@@ -10,7 +10,7 @@ const JournalPage = ({ journalID }) => {
     //
   }, [content, activeItem]);
   if (loading) {
-    return <div>loading</div>;
+    return <div>loading...</div>;
   }
   if (error) {
     console.log(error);
@@ -31,12 +31,8 @@ const JournalPage = ({ journalID }) => {
       FileURL,
       Authors,
     } = item;
-    const cover = CoverURL ? (
-      <img src={CoverURL} style={{ width: "10rem", height: "auto" }} />
-    ) : null;
-    const image = ImageURL ? (
-      <img src={ImageURL} style={{ width: "10rem", height: "auto" }} />
-    ) : null;
+    const cover = CoverURL ? <img src={CoverURL} /> : null;
+    const image = ImageURL ? <img src={ImageURL} /> : null;
     const htmlContent = Content ? (
       <div dangerouslySetInnerHTML={{ __html: Content }} />
     ) : null;
@@ -52,7 +48,7 @@ const JournalPage = ({ journalID }) => {
         </a>
       </p>
     ) : null;
-    const authors = Authors ? (
+    const authors = Authors?.length ? (
       <div>
         Authors:
         <ul>
@@ -66,11 +62,16 @@ const JournalPage = ({ journalID }) => {
         </ul>
       </div>
     ) : null;
+    const images =
+      cover || image ? (
+        <div className="journal-reader__content_images">
+          {cover} {image}
+        </div>
+      ) : null;
     setContent(
       <>
-        <h1>{Title}</h1>
-        {cover}
-        {image}
+        <h1 className="journal-reader__content_title">{Title}</h1>
+        {images}
         {doi}
         {number}
         {year}
@@ -83,13 +84,17 @@ const JournalPage = ({ journalID }) => {
   };
   return (
     <>
-      <h1>{Title}</h1>
-      <Volumes
-        journalID={journalID}
-        updateContent={updateContent}
-        activeItem={activeItem}
-      />
-      {content}
+      <h1 className="journal-reader__header">{Title}</h1>
+      <div className="journal-reader__container">
+        <div className="journal-reader__navigation">
+          <Volumes
+            journalID={journalID}
+            updateContent={updateContent}
+            activeItem={activeItem}
+          />
+        </div>
+        <div className="journal-reader__content">{content}</div>
+      </div>
     </>
   );
 };

@@ -8,11 +8,9 @@ function App({ element }) {
   const graphqlURL = element.getAttribute("data-graphql-url");
   const journalID = element.getAttribute("data-journal-id");
   return (
-    <div className="App">
+    <div className="journal-reader">
       <ApolloProvider client={client(graphqlURL)}>
-        <div className="App">
-          <JournalPage journalID={journalID} />
-        </div>
+        <JournalPage journalID={journalID} />
       </ApolloProvider>
     </div>
   );
