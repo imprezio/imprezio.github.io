@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import api from "../api";
 import Pagination from "./Pagination";
 
-const Articles = ({ issue, updateContent }) => {
+const Articles = ({ issue, updateContent, activeItem }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
+  const [articleActive, setArticleActive] = useState(false);
   const { data, loading, error } = api.GetArticles(issue.ID, limit, offset);
   const edges = data && active ? data.paginatedReadArticles.edges : [];
   const total =
@@ -34,7 +35,10 @@ const Articles = ({ issue, updateContent }) => {
         onClick={() => {
           updateContent(issue);
           setActive(!active);
-        }}>
+        }}
+        className={`${active ? "open" : ""} ${
+          activeItem === issue ? "active" : ""
+        }`}>
         {issue.Title}
       </button>
       <ul>
@@ -44,7 +48,11 @@ const Articles = ({ issue, updateContent }) => {
               <button
                 onClick={() => {
                   updateContent(article);
-                }}>
+                  setArticleActive(!articleActive);
+                }}
+                className={`${articleActive ? "open" : ""} ${
+                  activeItem === article ? "active" : ""
+                }`}>
                 {article.Title}
               </button>
             </li>

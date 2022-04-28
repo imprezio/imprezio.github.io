@@ -5,9 +5,10 @@ import api from "../api";
 const JournalPage = ({ journalID }) => {
   const { data, loading, error } = api.GetJournal(journalID);
   const [content, setContent] = useState(<></>);
+  const [activeItem, setActiveItem] = useState(null);
   useEffect(() => {
     //
-  }, [content]);
+  }, [content, activeItem]);
   if (loading) {
     return <div>loading</div>;
   }
@@ -16,18 +17,20 @@ const JournalPage = ({ journalID }) => {
     return <div>error</div>;
   }
   const { Title } = data.paginatedReadJournals.edges[0].node;
-  const updateContent = ({
-    Title,
-    CoverURL,
-    ImageURL,
-    Content,
-    DOI,
-    Number,
-    Year,
-    ArticleType,
-    FileURL,
-    Authors,
-  }) => {
+  const updateContent = (item) => {
+    setActiveItem(item);
+    const {
+      Title,
+      CoverURL,
+      ImageURL,
+      Content,
+      DOI,
+      Number,
+      Year,
+      ArticleType,
+      FileURL,
+      Authors,
+    } = item;
     const cover = CoverURL ? (
       <img src={CoverURL} style={{ width: "10rem", height: "auto" }} />
     ) : null;
@@ -81,7 +84,11 @@ const JournalPage = ({ journalID }) => {
   return (
     <>
       <h1>{Title}</h1>
-      <Volumes journalID={journalID} updateContent={updateContent} />
+      <Volumes
+        journalID={journalID}
+        updateContent={updateContent}
+        activeItem={activeItem}
+      />
       {content}
     </>
   );

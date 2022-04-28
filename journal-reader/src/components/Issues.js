@@ -3,7 +3,7 @@ import api from "../api";
 import Articles from "./Articles";
 import Pagination from "./Pagination";
 
-const Issues = ({ volume, updateContent }) => {
+const Issues = ({ volume, updateContent, activeItem }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
@@ -35,14 +35,21 @@ const Issues = ({ volume, updateContent }) => {
         onClick={() => {
           if (!active) updateContent(volume);
           setActive(!active);
-        }}>
+        }}
+        className={`${active ? "open" : ""} ${
+          activeItem === volume ? "active" : ""
+        }`}>
         {volume.Title}
       </button>
       <ul>
         {edges.map(({ node: issue }) => {
           return (
             <li key={issue.ID}>
-              <Articles issue={issue} updateContent={updateContent} />
+              <Articles
+                issue={issue}
+                updateContent={updateContent}
+                activeItem={activeItem}
+              />
             </li>
           );
         })}
