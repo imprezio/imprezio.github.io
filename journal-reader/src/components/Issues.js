@@ -7,7 +7,12 @@ const Issues = ({ volume, updateContent, activeItem }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
-  const { data, loading, error } = api.GetIssues(volume.ID, limit, offset);
+  const { data, loading, error } = api.GetIssues(
+    volume.ID,
+    limit,
+    offset,
+    !active
+  );
   const edges = data && active ? data.paginatedReadIssues.edges : [];
   const total =
     data && active ? data.paginatedReadIssues.pageInfo.totalCount : 0;

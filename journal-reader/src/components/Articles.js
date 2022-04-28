@@ -7,7 +7,12 @@ const Articles = ({ issue, updateContent, activeItem }) => {
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
   const [activeArticle, setActiveArticle] = useState(null);
-  const { data, loading, error } = api.GetArticles(issue.ID, limit, offset);
+  const { data, loading, error } = api.GetArticles(
+    issue.ID,
+    limit,
+    offset,
+    !active
+  );
   const edges = data && active ? data.paginatedReadArticles.edges : [];
   const total =
     data && active ? data.paginatedReadArticles.pageInfo.totalCount : 0;

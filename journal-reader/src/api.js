@@ -46,7 +46,7 @@ const api = {
     `;
     return useQuery(VOLUMES);
   },
-  GetIssues: (volumeID, limit, offset) => {
+  GetIssues: (volumeID, limit, offset, skip) => {
     const ISSUES = gql`
     query Issues {
         paginatedReadIssues(limit: ${limit}, offset: ${offset}, VolumeID: ${volumeID}) {
@@ -77,9 +77,9 @@ const api = {
         }
       }
     `;
-    return useQuery(ISSUES);
+    return useQuery(ISSUES, { skip: skip });
   },
-  GetArticles: (issueID, limit, offset) => {
+  GetArticles: (issueID, limit, offset, skip) => {
     const ISSUES = gql`
     query Articles {
         paginatedReadArticles(limit: ${limit}, offset: ${offset}, IssueID: ${issueID}) {
@@ -108,7 +108,7 @@ const api = {
         }
       }
     `;
-    return useQuery(ISSUES);
+    return useQuery(ISSUES, { skip: skip });
   },
 };
 
