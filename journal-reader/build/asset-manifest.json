@@ -1,15 +1,14 @@
 {
   "files": {
-    "main.css": "http://local.imprezio/journal-reader/build/static/css/main.fc2e2fec.css",
-    "main.js": "http://local.imprezio/journal-reader/build/static/js/main.a25adb7d.js",
-    "static/js/787.223550ad.chunk.js": "http://local.imprezio/journal-reader/build/static/js/787.223550ad.chunk.js",
-    "index.html": "http://local.imprezio/journal-reader/build/index.html",
-    "main.fc2e2fec.css.map": "http://local.imprezio/journal-reader/build/static/css/main.fc2e2fec.css.map",
-    "main.a25adb7d.js.map": "http://local.imprezio/journal-reader/build/static/js/main.a25adb7d.js.map",
-    "787.223550ad.chunk.js.map": "http://local.imprezio/journal-reader/build/static/js/787.223550ad.chunk.js.map"
+    "main.css": "https://imprezio.github.io/journal-reader/build/static/css/main.31d6cfe0.css",
+    "main.js": "https://imprezio.github.io/journal-reader/build/static/js/main.c220d004.js",
+    "static/js/787.223550ad.chunk.js": "https://imprezio.github.io/journal-reader/build/static/js/787.223550ad.chunk.js",
+    "index.html": "https://imprezio.github.io/journal-reader/build/index.html",
+    "main.c220d004.js.map": "https://imprezio.github.io/journal-reader/build/static/js/main.c220d004.js.map",
+    "787.223550ad.chunk.js.map": "https://imprezio.github.io/journal-reader/build/static/js/787.223550ad.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc2e2fec.css",
-    "static/js/main.a25adb7d.js"
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.c220d004.js"
   ]
 }
