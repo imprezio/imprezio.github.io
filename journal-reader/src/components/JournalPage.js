@@ -31,8 +31,8 @@ const JournalPage = ({ journalID }) => {
       FileURL,
       Authors,
     } = item;
-    const cover = CoverURL ? <img src={CoverURL} /> : null;
-    const image = ImageURL ? <img src={ImageURL} /> : null;
+    const cover = CoverURL ? <img src={CoverURL} alt={Title} /> : null;
+    const image = ImageURL ? <img src={ImageURL} alt={Title} /> : null;
     const htmlContent = Content ? (
       <div dangerouslySetInnerHTML={{ __html: Content }} />
     ) : null;
@@ -43,7 +43,7 @@ const JournalPage = ({ journalID }) => {
     const file = FileURL ? (
       <p>
         File:{" "}
-        <a href={FileURL} target="_blank">
+        <a href={FileURL} target="_blank" rel="noreferrer">
           {FileURL}
         </a>
       </p>
