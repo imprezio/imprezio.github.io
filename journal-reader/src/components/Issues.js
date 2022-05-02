@@ -3,7 +3,7 @@ import api from "../api";
 import Articles from "./Articles";
 import Pagination from "./Pagination";
 
-const Issues = ({ volume, updateContent, activeItem }) => {
+const Issues = ({ volume, updateContent, activeItem, toggleOnStart }) => {
   const limit = 5;
   const [offset, setOffset] = useState(0);
   const [active, setActive] = useState(false);
@@ -24,8 +24,14 @@ const Issues = ({ volume, updateContent, activeItem }) => {
       total={total}
     />
   ) : null;
+  const toggleVolume = () => {
+    if (!active) updateContent(volume);
+    setActive(!active);
+  };
   useEffect(() => {
-    //
+    if (!activeItem && toggleOnStart) {
+      toggleVolume();
+    }
   }, [loading, offset]);
   if (loading) {
     return <div>loading...</div>;
@@ -37,10 +43,7 @@ const Issues = ({ volume, updateContent, activeItem }) => {
   return (
     <>
       <button
-        onClick={() => {
-          if (!active) updateContent(volume);
-          setActive(!active);
-        }}
+        onClick={() => toggleVolume()}
         className={`${active ? "open" : ""} ${
           activeItem === volume ? "active" : ""
         }`}>

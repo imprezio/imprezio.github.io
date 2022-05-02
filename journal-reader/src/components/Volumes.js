@@ -23,7 +23,7 @@ const Volumes = ({ journalID, updateContent, activeItem }) => {
   return (
     <>
       <ul>
-        {edges.map(({ node: volume }) => {
+        {edges.map(({ node: volume }, index) => {
           return (
             <li key={volume.ID}>
               <Issues
@@ -31,6 +31,7 @@ const Volumes = ({ journalID, updateContent, activeItem }) => {
                 issueID={volume.ID}
                 updateContent={updateContent}
                 activeItem={activeItem}
+                toggleOnStart={!index}
               />
             </li>
           );
